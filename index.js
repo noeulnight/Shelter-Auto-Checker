@@ -92,6 +92,6 @@ schedule.scheduleJob('55 23 * * *', async function retokens() {
   await retoken(db)
 })
 
-schedule.scheduleJob('1 0 * * *', async function checks() {
+schedule.scheduleJob('0 0 * * *', async function checks() {
   await check(db)
 })
