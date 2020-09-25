@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/index.css">
+    <meta name="og:site_name" content="한번 등록으로 매일 자동 출석체크">
+    <meta property="og:title" content="오-토 출석체크">
+    <meta property="og:description" content="By Noeul">
+    <meta name="theme-color" content="#4C566A">
+    <meta property="og:image" content="https://shelter.noeul.codes/src/back.png">
+    <meta name="twitter:card" content="summary">
+    <link rel=" shortcut icon" href="/src/icon.ico">
+    <link rel="icon" href="/src/icon.ico">
+    <title>자동 출석체크</title>
+  </head>
+  <body class="w-100 h-100 background">
+    <div class="container foreground w-100 shadow p-0">
+      <div class="text-center jumbotron p-0 text-black shadow">
+        <img style="height: 80px; margin-top: 80px;" src="https://media.shelter.id/1599024388585_배너수정.png">
+      </div>
+      <div class="container mt-5 p-3">
+        <div class="text-center text-white" style="font-family: 'Recipekorea';">
+          <h1>오-토 출석체크</h1>
+          <h5>한번 등록으로 매일 자동 출석체크</h5><br/><br/>
+        </div>
+        <form method="POST" action="/api">
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label text-white" for="email">이메일</label>
+              <div class="form-outline mb-4">
+                <input type="text" name="email" id="email" class="form-control text-white" />
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label text-white" for="passwd">비밀번호</label>
+              <div class="form-outline mb-4">
+                <input type="password" name="passwd" id="passwd" class="form-control text-white" />
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-white" for="send">출석체크때 사용할 문장을 적어주세요 ( 공백으로 등록시 <a style="font-weight: bold;">와! 출첵!</a>으로 출석체크됩니다 )</label>
+              <div class="form-outline mb-4">
+                <input type="text" name="send" id="send" class="form-control text-white" />
+              </div>
+            </div>
+            <div class="col-8">
+              <label class="form-label text-white" for="tag">출석체크를 할 ID를 검색해주세요</label>
+              <div class="form-outline mb-4">
+                <input readonly type="text" name="tag" id="tag" class="form-control text-white" />
+              </div>
+            </div>
+            <div class="col-2">
+              <label class="form-label text-white" for="search">ID 검색</label>
+              <div class="form-outline mb-4">
+                <button class="btn btn-nord text-white mb-4" type="button" style="width: 100%;"  data-toggle="modal" data-target="#search">검색</button>
+              </div>
+            </div>
+            <div class="col-2">
+              <label class="form-label text-white" for="reset">초기화</label>
+              <div class="form-outline mb-4">
+                <button class="btn btn-nord text-white mb-4" type="button" style="width: 100%;"  onclick="document.getElementById('tag').value = ''; already = []">초기화</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-nord text-white mb-4" style="width: 100%;" type="button" data-toggle="modal" data-target="#selfallow">개인정보 수집 이용동의</button><br/><br/>
+          <button disabled class="btn btn-nord text-white mb-4" style="width: 100%;" type="submit" value="checked" id="submit">등록</button>
+        </form>
+        <p class="notify"></p>
+        <p class="text-white">*등록된 개인정보는 안전하게 보관되며, 주말 상관없이 매일 0시 0분 부터 10분 사이 무작위한 시간에 자동으로 출석체크를 해드립니다</p>
+        <div class="alert alert-danger hover-shadow" role="alert">
+          <ul class="m-0">
+            <li>이 서비스는 소셜계정 로그인을 지원하지 않습니다.</li>
+            <li>자동 출석체크 5분전 토큰 갱신을 위해 서비스가 직접 Shelter.id에 접속합니다.</li>
+            <li>이 서비스는 귀찮은 출석체크를 자동으로 할 수 있게 하는 목적으로 개발되었습니다.</li>
+            <li>이 서비스를 등록함으로서 발생하는 피해는 서비스를 등록한 본인에게 책임이 있습니다.</li>
+            <li>개인정보 수집에 대한 동의를 거부할 권리가 있으며, 동의 거부 시에는 서비스 등록이 제한될 수 있습니다.</li>
+            <li>만약 이 서비스를 등록하였으나 서비스를 해지하고 싶다면 <a style="font-weight: bold;">https://shelter.noeul.codes/remove</a> 로 이동해주세요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2 text-center text-white">
+      <button type="button" class=" btn btn-nord btn-sm text-white mr-1" data-toggle="modal" data-target="#credit">
+        Credits
+      </button>
+      Hosted with <span style="color: #e25555;">&hearts;</span> by <a class="hover-shadow" style="color: #adf093">Noeul Hosting</a>.
+    </div>
+    <br/>
+    <div
+      class="modal fade"
+      id="credit"
+      tabindex="-1"
+      aria-labelledby="creditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-white bg-dark">
+            <h5 class="modal-title" id="creditLabel">만든사람 & 도움준 사람들</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bg-dark text-white text-center">
+            백엔드, UI디자인, API분석 <br />
+            Noeul, Lim Tae Hyun<br /><br />
+
+            UI디자인<br />
+            PMH, Park Min Hyeok<br /><br />
+
+            테스터 <br />
+            머오오옻통<br /><br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="search"
+      tabindex="-1"
+      aria-labelledby="creditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header text-white bg-dark">
+            <h5 class="modal-title" id="creditLabel">ID 검색</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bg-dark text-white text-center" >
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="쉘터 유저네임을 적어주세요" id="user" aria-label="쉘터 유저네임을 적어주세요"
+                aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect text-white" type="button" onclick="search()">검색</button>
+              </div>
+            </div>
+            <p class="text-white">*쉘터 정보가 null로 돼 있을 경우 표시되지 않을 수 있습니다</p>
+            <table class="table text-white" id="searchtable">
+              <th>검색순위</th>
+              <th>ID</th>
+              <th>유저네임</th>
+              <th>쉘터이름</th>
+              <th>추가</th>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="selfallow"
+      tabindex="-1"
+      aria-labelledby="creditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header text-white bg-dark">
+            <h5 class="modal-title" id="creditLabel">[필수] 개인정보 수집 및 이용 동의</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bg-dark text-white" >
+            <div class="alert alert-success hover-shadow" role="alert">
+              <ul class="m-0">
+                <li>Noeul.codes는 아래의 목적으로 개인정보를 수집 및 이용하며, 회원의 개인정보를 안전하게 취급하는데 최선을 다합니다.</li><br/>
+    
+                <li>1. 목적 : 쉘터 로그인용 아이디 비밀번호, 계정 사용불가 알림</li>
+                <li>2. 항목 : 아이디(이메일주소), 비밀번호</li>
+                <li>3. 보유기간 : 회원 탈퇴 시까지 보유</li><br/>
+    
+                <li>위 개인정보 수집에 대한 동의를 거부할 권리가 있으며, 동의 거부 시에는 서비스 등록이 제한될 수 있습니다.</li>
+                <li>만14세 미만의 아동은 해당 서비스를 가입하실수 없습니다.</li><br/>
+                
+                <li><div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="selfallowcheck" />
+                  <label class="form-check-label" for="selfallowcheck">
+                    개인정보 수집 이용 동의
+                  </label>
+                </div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/src/main.js"></script>
+  </body>
+</html>

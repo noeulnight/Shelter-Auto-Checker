@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/src/index.css">
+    <meta name="og:site_name" content="한번 등록으로 매일 자동 출석체크">
+    <meta property="og:title" content="E-Z 자동 자가진단">
+    <meta property="og:description" content="By Noeul">
+    <meta name="theme-color" content="#4C566A">
+    <meta property="og:image" content="https://shelter.noeul.codes/src/back.png">
+    <meta name="twitter:card" content="summary">
+    <title>자동 출석체크</title>
+  </head>
+  <body class="w-100 h-100 background">
+    <div class="container foreground w-100 shadow p-0">
+      <div class="text-center jumbotron p-0 text-black shadow">
+        <img style="height: 80px; margin-top: 80px;" src="https://media.shelter.id/1599024388585_배너수정.png">
+      </div>
+      <div class="container mt-5 p-3">
+        <div class="text-center text-white" style="font-family: 'Recipekorea';">
+          <h1>오-토 출석체크</h1>
+          <h5>한번 등록으로 매일 자동 출석체크 - 계정 제거</h5><br/><br/>
+        </div>
+        <form method="POST" action="/api2">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-outline mb-4">
+                <input type="text" name="email" id="email" class="form-control text-white" />
+                <label class="form-label text-white" for="email">이메일</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-outline mb-4">
+                <input type="password" name="passwd" id="passwd" class="form-control text-white" />
+                <label class="form-label text-white" for="passwd">비밀번호</label>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-nord text-white mb-4" type="submit" value="checked">해지</button>
+        </form>
+        <p class="notify"></p>
+        <p class="text-white">*등록된 개인정보는 안전하게 보관되며, 주말 상관없이 매일 0시 0분 부터 10분 사이 무작위한 시간에 자동으로 출석체크를 해드립니다</p>
+        <div class="alert alert-danger hover-shadow" role="alert">
+          <ul class="m-0">
+            <li>이 서비스는 소셜계정 로그인을 지원하지 않습니다.</li>
+            <li>자동 출석체크 10분전 토큰 갱신을 위해 서비스가 Shelter.id에 접속합니다.</li>
+            <li>이 서비스는 귀찮은 출석체크를 자동으로 할 수 있게 하는 목적으로 개발되었습니다.</li>
+            <li>이 서비스를 등록함으로서 발생하는 피해는 서비스를 등록한 본인에게 책임이 있습니다.</li>
+            <li>만약 이 서비스를 등록하였으나 서비스를 해지하고 싶다면 <a style="font-weight: bold;">https://shelter.noeul.codes/remove</a> 로 이동해주세요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2 text-center text-white">
+      <button type="button" class=" btn btn-nord btn-sm text-white mr-1" data-toggle="modal" data-target="#credit">
+        Credits
+      </button>
+      Hosted with <span style="color: #e25555;">&hearts;</span> by <a class="hover-shadow" style="color: #adf093">Noeul Hosting</a>.
+    </div>
+    <br/>
+    <div
+      class="modal fade"
+      id="credit"
+      tabindex="-1"
+      aria-labelledby="creditLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-white bg-dark">
+            <h5 class="modal-title" id="creditLabel">만든사람 & 도움준 사람들</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bg-dark text-white text-center">
+            백엔드, UI디자인, API분석 <br />
+            Noeul, Lim Tae Hyun<br /><br />
+
+            UI디자인<br />
+            PMH, Park Min Hyeok<br /><br />
+
+            테스터 <br />
+            머오오옻통<br /><br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.js"></script>
+    <script src="/src/main.js"></script>
+  </body>
+</html>

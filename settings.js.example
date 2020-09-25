@@ -1,0 +1,5 @@
+module.exports = {
+  port: 8009, // 서버를 열 포트
+  username: '', // DB 유저네임
+  password: '' // DB 비번
+}
